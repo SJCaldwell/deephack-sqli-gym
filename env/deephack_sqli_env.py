@@ -14,6 +14,15 @@ class DeephackSqliEnv(Env):
 
         self.db = db
 
+        #initialize action space
+        chars = list(string.ascii_lowercase + string.digits + "=.;_ '()|%")
+        self.char_depth = len(chars)
+        self.char_indices = dict((c, i) for i, c in enumerate(chars))
+        self.indices_char = dict((i, c) for i, c in enumerate(chars))
+        self.acton_space = spaces.Discrete(self.char_depth)
+
+
+
         self.action_space = []
 
     def step(self, action):
